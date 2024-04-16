@@ -1,0 +1,28 @@
+version: 3.8
+services:
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql-db-volume:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    restart: always
+
+  pythonapp:
+     build: ./python/
+     command: sh -c "sleep 10s ; python3 scripts/ingestion.py"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-db-volume:
