@@ -9,7 +9,6 @@ services:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
             - MYSQL_DATABASE=${MYSQL_DATABASE:-db}
             - MYSQL_USER=${MYSQL_USER:-root}
-            - TABLE=${TABLE:-cadastro}
         depends_on:
           mysql:
             condition: service_healthy
