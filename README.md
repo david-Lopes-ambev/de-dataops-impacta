@@ -41,10 +41,12 @@ Antes de começar, certifique-se de ter o Git e o Docker instalados no seu siste
     ```
 6. Edite o arquivo .env atribuindo valor às variáveis:
 
+    ``` 
     URL=
     MYSQL_DATABASE=
     MYSQL_ROOT_PASSWORD=
     MYSQL_USER=
+    ```
 
 7. Execute o seguinte comando para inicializar os serviços:
 
