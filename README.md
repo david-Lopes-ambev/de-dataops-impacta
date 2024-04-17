@@ -9,7 +9,7 @@ Projeto disciplina de DataOps
 - Ferramentas básicas em dataops
 
 
-![alt text](imgs/projeto_final.png)
+![alt text](pipeline_.png)
 
 ```
 dataops04
