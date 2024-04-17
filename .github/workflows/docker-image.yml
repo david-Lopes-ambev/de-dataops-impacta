@@ -14,9 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Change directory to Python code
-      run: cd python
-    - name: Listar diretório
-      run: ls -la
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        cd python
+        docker build . --file Dockerfile --tag my-image-name:$(date +%s)
