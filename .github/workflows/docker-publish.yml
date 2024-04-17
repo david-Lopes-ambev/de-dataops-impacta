@@ -42,5 +42,5 @@ jobs:
           context: ./python
           file: ./python/Dockerfile
           push: true
-          tags: docker.io/crisleal/dataops:main
+          tags: docker.io/crisleal/dataops:latest
           labels: ${{ steps.meta.outputs.labels }}
