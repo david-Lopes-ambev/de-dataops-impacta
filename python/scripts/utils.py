@@ -2,11 +2,12 @@
 from datetime import datetime
 import os
 import re
+import logging
 import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import mysql.connector
-import logging
+
 
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
@@ -76,7 +77,6 @@ class Saneamento:
         user1 = os.getenv('MYSQL_USER')
         database1 = os.getenv('MYSQL_DATABASE')
         password1 = os.getenv('MYSQL_ROOT_PASSWORD')
-        table1 = os.getenv('TABLE')
         con = mysql.connector.connect(
             user=user1, password=password1, host='mysql', port="3306", database=database1)
 
