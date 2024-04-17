@@ -9,22 +9,7 @@ Projeto disciplina de DataOps
 - Ferramentas básicas em dataops
 
 
-![alt text](pipeline_.png)
+![alt text](imgs/pipeline_.png)
 
-```
-dataops04
-│   README.md
-│   .gitignore 
-│   .github/workflows
-|
-└───scripts
-│   │   ingestion.py
-│   │   config.py
-│   │   utils.py
-│   │   metadado.xlsx
-|
-└────data
-|   │   └─── raw
-|   │   └─── work
-```
+
 
