@@ -3,11 +3,11 @@
 import os
 import uuid
 from datetime import datetime
-
+import logging
 import requests
 import pandas as pd
 from dotenv import load_dotenv
-import logging
+
 
 from config import configs
 import utils
@@ -29,8 +29,12 @@ def ingestion():
     try:
         response = requests.get(api_url, timeout=10).json()
         data = response['results']
-    except Exception as exception_error:
-         utils.error_handler(exception_error, 'read_api')
+    except requests.exceptions.RequestException as request_error:
+        logging.error("Erro de solicitação HTTP: %s", request_error)
+        utils.error_handler(request_error, 'read_api')
+    except KeyError as key_error:
+        logging.error("Erro de solicitação HTTP: %s", request_error)
+        utils.error_handler(key_error, 'read_api')
 
     df = pd.json_normalize(data)
     df['load_date'] = datetime.now().strftime("%H:%M:%S")
