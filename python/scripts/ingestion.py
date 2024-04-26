@@ -48,18 +48,23 @@ def preparation(file):
     Arguments: file -> nome do arquivo raw
     Outputs: Salva base limpa em local específico
     """
-
-    logging.info("Iniciando a preparação")
-    df = pd.read_csv(file, sep=";")
-    san = utils.Saneamento(df, config_file)
-    san.select_rename()
-    logging.info("Dados renomeados e selecionados")
-    san.tipagem()
-    logging.info("Dados tipados")
-    san.trata_valores()
-    logging.info("Caracteres tratados")
-    san.save_work()
-    logging.info("Dados salvos")
+    try:
+        logging.info("Iniciando a preparação")
+        df = pd.read_csv(file, sep=";")
+        san = utils.Saneamento(df, config_file)
+        san.select_rename()
+        logging.info("Dados renomeados e selecionados")
+        san.tipagem()
+        logging.info("Dados tipados")
+        san.trata_valores()
+        logging.info("Caracteres tratados")
+        san.save_work()
+        logging.info("Dados salvos")
+    except KeyError as key_error:
+        logging.error("Erro : %s", key_error)
+        utils.error_handler(key_error, 'read_api')
+        
+        
 
 if __name__ == '__main__':
     file_name = ingestion()
