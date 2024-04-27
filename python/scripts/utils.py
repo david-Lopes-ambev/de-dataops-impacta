@@ -44,15 +44,20 @@ class Saneamento:
         Função tipagem
         Outputs: Faz a tipagem das colunas
         """
-        for col in self.colunas_new:
-            tipo = self.metadado.loc[self.metadado['nome'] == col]['tipo'].item()
-            if tipo == "int":
-                tipo = self.data[col].astype(int)
-            elif tipo == "float":
-                self.data[col].replace(",", ".", regex=True, inplace = True)
-                self.data[col] = self.data[col].astype(float)
-            elif tipo == "date":
-                self.data[col] = pd.to_datetime(self.data[col]).dt.strftime('%Y-%m-%d')
+        try:
+            for col in self.colunas_new:
+                tipo = self.metadado.loc[self.metadado['nome'] == col]['tipo'].item()
+                if tipo == "int":
+                    tipo = self.data[col].astype(int)
+                elif tipo == "float":
+                    self.data[col].replace(",", ".", regex=True, inplace = True)
+                    self.data[col] = self.data[col].astype(float)
+                elif tipo == "date":
+                    self.data[col] = pd.to_datetime(self.data[col]).dt.strftime('%Y-%m-%d')
+         except AttributeError as e:
+            print(f"Erro de atributo: {e}")
+            error_handler(e, "AttributeErrorCleanString")
+
 
     def trata_valores(self):
         """
