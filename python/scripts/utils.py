@@ -72,19 +72,22 @@ class Saneamento:
         Função save_work
         Outputs: Salva as colunas e os dados já formatados para o sql
         """
-        self.data['load_date'] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-
-        user1 = os.getenv('MYSQL_USER')
-        database1 = os.getenv('MYSQL_DATABASE')
-        password1 = os.getenv('MYSQL_ROOT_PASSWORD')
-        con = mysql.connector.connect(
-            user=user1, password=password1, host='mysql', port="3306", database=database1)
-
-        print("DB connected")
-
-        engine  = create_engine(f"mysql+mysqlconnector://{user1}:{password1}@mysql/{database1}")
-        self.data.to_sql('cadastro', con=engine, if_exists='append', index=False)
-        con.close()
+        try:
+            self.data['load_date'] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+    
+            user1 = os.getenv('MYSQL_USER')
+            database1 = os.getenv('MYSQL_DATABASE')
+            password1 = os.getenv('MYSQL_ROOT_PASSWORD')
+            con = mysql.connector.connect(
+                user=user1, password=password1, host='mysql', port="3306", database=database1)
+    
+            print("DB connected")
+    
+            engine  = create_engine(f"mysql+mysqlconnector://{user1}:{password1}@mysql/{database1}")
+            self.data.to_sql('cadastro', con=engine, if_exists='append', index=False)
+            con.close()
+        except mysql.connector.Error as e:
+            print(f"Erro de conexão com o banco de dados {e}")
 
 
 def error_handler(exception_error, stage):
