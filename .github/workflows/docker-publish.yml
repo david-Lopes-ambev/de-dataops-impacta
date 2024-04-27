@@ -56,5 +56,5 @@ jobs:
           context: ./python
           file: ./python/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_IMAGE_NAME }}
+          tags: ${{ secrets.DOCKER_IMAGE_NAME2 }}
           labels: ${{ steps.meta.outputs.labels }}
