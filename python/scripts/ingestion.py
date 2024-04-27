@@ -64,8 +64,6 @@ def preparation(file):
         logging.error("Erro : %s", key_error)
         utils.error_handler(key_error, 'read_api')
         
-        
-
 if __name__ == '__main__':
     file_name = ingestion()
     preparation(file_name)
