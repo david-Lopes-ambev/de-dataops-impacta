@@ -36,10 +36,15 @@ def ingestion():
         logging.error("Erro de solicitação HTTP: %s", request_error)
         utils.error_handler(key_error, 'read_api')
 
-    df = pd.json_normalize(data)
-    df['load_date'] = datetime.now().strftime("%H:%M:%S")
-    file = f"{config_file['raw_path']}{str(uuid.uuid4())}.csv"
-    df.to_csv(file, sep=";", index=False)
+    try:
+        df = pd.json_normalize(data)
+        df['load_date'] = datetime.now().strftime("%H:%M:%S")
+        file = f"{config_file['raw_path']}{str(uuid.uuid4())}.csv"
+        df.to_csv(file, sep=";", index=False)
+    except KeyError as key_error:
+        logging.error("Erro : %s", key_error)
+        utils.error_handler(key_error, 'read_api'):
+        
     return file
 
 def preparation(file):
