@@ -2,6 +2,7 @@ version: '3'
 services:
 
     pythonapp:
+        image: python:3.9
         build: ./python/
         command: sh -c "python3 scripts/ingestion.py"
         environment:
