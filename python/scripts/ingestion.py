@@ -62,7 +62,7 @@ def preparation(file):
         logging.info("Dados salvos")
     except KeyError as key_error:
         logging.error("Erro : %s", key_error)
-        utils.error_handler(key_error, 'read_api')        
+        utils.error_handler(key_error, 'read_api')   
 if __name__ == '__main__':
     file_name = ingestion()
     preparation(file_name)
